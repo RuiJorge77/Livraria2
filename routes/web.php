@@ -48,3 +48,7 @@ Route::get('/','App\Http\Controllers\PesquisaController@index')
 
 Route::post('/form','App\Http\Controllers\PesquisaController@formenviado')
     ->name('pesquisa.form');
+
+Route::get('/livros/create', 'App\Http\Controllers\LivrosController@create')->name('livros.create');
+
+Route::post('/livros/store', 'App\Http\Controllers\LivrosController@store')->name('livros.store');

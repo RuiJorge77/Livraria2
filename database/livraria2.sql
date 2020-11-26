@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 06-Nov-2020 às 16:03
+-- Generation Time: 26-Nov-2020 às 10:04
 -- Versão do servidor: 10.1.38-MariaDB
 -- versão do PHP: 7.3.2
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `livraria`
+-- Database: `livraria2`
 --
 
 -- --------------------------------------------------------
@@ -27,14 +27,6 @@ SET time_zone = "+00:00";
 --
 -- Estrutura da tabela `autores`
 --
-CREATE TABLE `editoras_livros` (
-  `id_editoras` int(11) NOT NULL,
-  `id_livro` varchar(100) NOT NULL,
-  `titulo` varchar(20) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL
-);
 
 CREATE TABLE `autores` (
   `id_autor` int(11) NOT NULL,
@@ -125,6 +117,21 @@ INSERT INTO `editoras` (`id_editora`, `nome`, `morada`, `observacoes`, `created_
 (6, 'Green Lines Instituto', '', NULL, NULL, NULL, NULL),
 (7, 'Lambert Academic Publishing', '', NULL, NULL, NULL, NULL),
 (8, 'Kwigia editora', '', NULL, NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `editoras_livros`
+--
+
+CREATE TABLE `editoras_livros` (
+  `id_editora` int(11) NOT NULL,
+  `id_livro` int(11) NOT NULL,
+  `titulo` varchar(20) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
