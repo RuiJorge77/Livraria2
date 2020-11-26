@@ -52,3 +52,15 @@ Route::post('/form','App\Http\Controllers\PesquisaController@formenviado')
 Route::get('/livros/create', 'App\Http\Controllers\LivrosController@create')->name('livros.create');
 
 Route::post('/livros/store', 'App\Http\Controllers\LivrosController@store')->name('livros.store');
+
+Route::get('/autores/create', 'App\Http\Controllers\AutoresController@create')->name('autores.create');
+
+Route::post('/autores/store', 'App\Http\Controllers\AutoresController@store')->name('autores.store');
+
+Route::get('/editoras/create', 'App\Http\Controllers\EditorasController@create')->name('editoras.create');
+
+Route::post('/editoras/store', 'App\Http\Controllers\EditorasController@store')->name('editoras.store');
+
+Route::get('/generos/create', 'App\Http\Controllers\GenerosController@create')->name('generos.create');
+
+Route::post('/generos/store', 'App\Http\Controllers\GenerosController@store')->name('generos.store');

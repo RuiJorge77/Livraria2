@@ -8,6 +8,7 @@ use App\Models\Livro;
 class LivrosController extends Controller
 {
     //
+    
     public function index(){
         //$livros = Livro::all()->sortbydesc('idl');
         $livros= Livro::paginate(4);
@@ -15,6 +16,7 @@ class LivrosController extends Controller
             'livros'=>$livros
         ]);
     }
+    
     public function show(Request $request){
         $idLivro = $request->id;
         //$livro=Livro::findOrFail($idLivro);
@@ -39,10 +41,14 @@ class LivrosController extends Controller
             'isbn'=>['required', 'min:13', 'max:13'],
             'observacoes'=>['nullable', 'min:3', 'max:255'],
             'imagem_capa'=>['nullable'],
-            'id_genero'=>['numeric', 'min:3', 'max:100'],
-            'id_autor'=>['numeric', 'min:3', 'max:100'],
+            'id_genero'=>['numeric', 'min:1', 'max:100'],
+            'id_autor'=>['numeric', 'min:1', 'max:100'],
             'sinopse'=>['nullable', 'min:3', 'max:255'],
         ]);
         $livro = Livro::create($novoLivro);
+        
+        return redirect()->route('livros.show', [
+           'id'=>$livro->id_livro 
+        ]);
     }
 }
