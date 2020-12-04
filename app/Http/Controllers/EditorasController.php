@@ -60,10 +60,29 @@ class EditorasController extends Controller
             'morada'=>['required', 'min:3', 'max:100'],
             'observacoes'=>['nullable', 'min:1', 'max:100'],
             ]);
-        $editora->update($atualizarEditora);
+        $editora->update($updateEditora);
         
         return redirect()->route('editoras.show', [
            'id'=>$editora->id_editora 
         ]);
+    }
+    
+    public function delete (Request $request){
+        $editora = editora::where('id_editora', $request->id)->first();
+        if(is_null($editora)) 
+        {
+            return redirect()->route('editoras.index')->with('mensagem', 'A Editora nao existe');
+        }
+        else
+        {
+            return view('editoras.delete', ['editora'=>$editora]);
+        }
+    }
+    
+    public function destroy (Request $request){
+        $ideditora = $request->id;
+        $editora = editora::findOrFail($ideditora);
+        $editora->delete();
+        return redirect()->route('editoras.index')->with('mensagem', 'Editora eliminado');
     }
 }
