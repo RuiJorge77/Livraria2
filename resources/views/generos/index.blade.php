@@ -12,4 +12,7 @@ Livraria
 </a></li>
 @endforeach
 </ul>
+<a href="{{route('generos.create')}}">
+    Adicionar Género
+</a>
 @endsection

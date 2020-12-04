@@ -12,4 +12,7 @@ Livraria
 </a></li>
 @endforeach
 </ul>
+<a href="{{route('editoras.create')}}">
+    Adicionar editora
+</a>
 @endsection

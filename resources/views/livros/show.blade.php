@@ -42,3 +42,9 @@ Created_at:{{$livro->created_at}}<br>
 Updated_at:{{$livro->updated_at}}<br>
 Deleted_at:{{$livro->deleted_at}}
 </ul>
+<a class="btn btn-primary" href="{{route('livros.edit', ['id'=>$livro->id_livro])}}">
+    editar
+</a>
+<a class="btn btn-primary" href="{{route('livros.delete', ['id'=>$livro->id_livro])}}">
+    Eleminar
+</a>

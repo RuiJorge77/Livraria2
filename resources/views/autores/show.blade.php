@@ -18,3 +18,9 @@ Created_at:{{$autores->created_at}}<br>
 Updated_at:{{$autores->updated_at}}<br>
 Deleted_at:{{$autores->deleted_at}}
 </ul>
+<a class="btn btn-primary" href="{{route('autores.edit', ['id'=>$autor->id_autor])}}">
+    editar
+</a>
+<a class="btn btn-primary" href="{{route('autores.delete', ['id'=>$autor->id_autor])}}">
+    Eleminar
+</a>

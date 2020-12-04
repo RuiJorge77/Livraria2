@@ -35,20 +35,32 @@
         deverá indicar uma imagem de capa correta
         <br>
     @endif
-    Género: <input type="text" name="id_genero" value="{{old('id_genero')}}"><br>
+    Género:
+    <select name="id_genero">
+        @foreach ($generos as $genero)
+        <option value="{{$genero->id_genero}}">{{$genero->designacao}}</option>
+        @endforeach
+    </select>
+    <br>
     @if($errors->has('id_genero') )
         deverá indicar um genero correto
         <br>
     @endif
-    Autor: <input type="text" name="id_autor" value="{{old('id_autor')}}"><br>
+    Autor(es):
+    <select name="id_autor[]" multiple="multiple">
+        @foreach ($autores as $autor)
+            <option value="{{$autor->id_autor}}">{{$autor->nome}}</option>
+        @endforeach
+    </select>
     @if($errors->has('id_autor') )
         deverá indicar um autor correto
         <br>
     @endif
+    <br>
     Sinopse: <input type="text" name="sinopse" value="{{old('sinopse')}}"><br>
     @if($errors->has('sinopse') )
         deverá indicar uma sinopse correta
         <br>
     @endif
-    <input type="submit" value="enviar">    
+    <input type="submit" value="enviar">   
 </form>

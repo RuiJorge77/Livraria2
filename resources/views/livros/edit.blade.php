@@ -36,20 +36,49 @@
         deverá indicar uma imagem de capa correta
         <br>
     @endif
-    Género: <input type="text" name="id_genero" value="{{$livro->id_genero}}"><br>
+    Género:
+    <select name="id_genero">
+        @foreach ($generos as $genero)
+        <option value="{{$genero->id_genero}}"
+        @if($genero->id_genero==$livro->id_genero)selected @endif
+        >{{$genero->designacao}}</option>
+        @endforeach
+    </select>
+    <br>
     @if($errors->has('id_genero') )
         deverá indicar um genero correto
         <br>
     @endif
-    Autor: <input type="text" name="id_autor" value="{{$livro->id_autor}}"><br>
+    Autor(es):
+    <select name="id_autor[]" multiple="multiple">
+        @foreach ($autores as $autor)
+            <option value="{{$autor->id_autor}}"
+                @if(in_array($autor->id_autor, $autoresLivro))selected @endif        
+            >{{$autor->nome}}</option>
+        @endforeach
+    </select>
     @if($errors->has('id_autor') )
         deverá indicar um autor correto
         <br>
     @endif
+    <br>
     Sinopse: <input type="text" name="sinopse" value="{{$livro->sinopse}}"><br>
     @if($errors->has('sinopse') )
         deverá indicar uma sinopse correta
         <br>
     @endif
+    Editora(es):
+    <select name="id_editora[]" multiple="multiple">
+        @foreach ($editoras as $editora)
+            <option value="{{$editora->id_editora}}"
+                @if(in_array($editora->id_editora, $editorasLivro))selected @endif        
+            >{{$editora->nome}}</option>
+        @endforeach
+    </select>
+    @if($errors->has('id_editora') )
+        deverá indicar uma Editora correta
+        <br>
+    @endif
+    <br>
     <input type="submit" value="enviar">    
 </form>
