@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
+
 use Illuminate\Http\Request;
 use App\Models\Livro;
 use App\Models\Genero;
@@ -44,6 +46,10 @@ class LivrosController extends Controller
     public function store(Request $request){
         //$novolivro = $request->all();
         //dd ($novolivro);
+        if(Auth::check()){
+            $userAtual = Auth::user()->id;
+            $livro['id_user']=$userAtual; 
+        }
         $novoLivro = $request->validate([
             'titulo'=>['required', 'min:3', 'max:100'],
             'idioma'=>['nullable', 'min:3', 'max:10'],

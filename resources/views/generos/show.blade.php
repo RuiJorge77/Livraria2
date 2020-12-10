@@ -16,9 +16,12 @@ Created_at:{{$genero->created_at}}<br>
 Updated_at:{{$genero->updated_at}}<br>
 Deleted_at:{{$genero->deleted_at}}
 </ul>
+@if(auth()->check())
+<a href="{{route('generos.edit', ['id'=>$genero->id_genero])}}">Editar</a>
 <a class="btn btn-primary" href="{{route('generos.edit', ['id'=>$genero->id_genero])}}">
     editar
 </a>
 <a class="btn btn-primary" href="{{route('generos.delete', ['id'=>$genero->id_genero])}}">
     Eleminar
 </a>
+@endif

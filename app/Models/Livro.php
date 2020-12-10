@@ -27,7 +27,8 @@ class Livro extends Model
         'imagem_capa',
         'id_genero',
         'id_autor',
-        'sinopse'
+        'sinopse',
+        'id_user'
     ];
     
     public function autor(){

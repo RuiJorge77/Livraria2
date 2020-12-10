@@ -12,7 +12,9 @@ Livraria
 </a></li>
 @endforeach
 </ul>
-<a href="{{route('generos.create')}}">
+@if(auth()->check())
+<a class="btn btn-primary" href="{{route('generos.create')}}">
     Adicionar Género
 </a>
+@endif
 @endsection

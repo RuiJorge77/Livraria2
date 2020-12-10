@@ -19,10 +19,12 @@ Created_at:{{$editora->created_at}}<br>
 Updated_at:{{$editora->updated_at}}<br>
 Deleted_at:{{$editora->deleted_at}}
 </ul>
+@if(auth()->check())
+<a href="{{route('editoras.edit', ['id'=>$editora->id_editora])}}">Editar</a>
 <a class="btn btn-primary" href="{{route('editoras.edit', ['id'=>$editora->id_editora])}}">
     editar
 </a>
 <a class="btn btn-primary" href="{{route('editoras.delete', ['id'=>$editora->id_editora])}}">
     Eleminar
 </a>
-   
+@endif
