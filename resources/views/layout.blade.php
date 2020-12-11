@@ -11,7 +11,7 @@
     <script src="{{asset('js/all.min.js')}}"></script>
     <style>
       body{
-        background-color: #22c1c3;
+        background-color: #000000;
         color: #ffffff;
       }
       a{
@@ -20,6 +20,9 @@
       table,tr,td,th{
         color:#ffffff;
       }
+        nav{
+            color:#000000;
+        }
     </style>  
     </head>
 <body>

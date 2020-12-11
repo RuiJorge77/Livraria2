@@ -52,4 +52,8 @@ class Livro extends Model
             'id_editora'
         )->withTimestamps();
     }
+    
+    public function user(){
+        return $this->belongsTo('App\Models\User','id_user');
+    }
 }
