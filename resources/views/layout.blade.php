@@ -23,6 +23,9 @@
         nav{
             color:#000000;
         }
+        button,input{
+            background-color: #6be585;
+        }
     </style>  
     </head>
 <body>

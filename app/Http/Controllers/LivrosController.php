@@ -117,7 +117,7 @@ class LivrosController extends Controller
     }
     
     public function delete (Request $request){
-        $livro = Livro::where('id_livro',$r->id)->with(['genero','autores','editoras'])->first();
+        $livro = Livro::where('id_livro',$request->id)->with(['genero','autores','editoras'])->first();
         if(isset($livro->users->id_user)){
             if(Auth::user()->id == $livro->users->id_user){
                 if(is_null($livro)){
@@ -151,5 +151,13 @@ class LivrosController extends Controller
         $livro->editoras()->detach($editorasLivro);
         $livro->delete();
         return redirect()->route('livros.index')->with('mensagem', 'livro eliminado');
+    }
+    
+    public function comentarios (request $request){
+        $idlivro = $request->id_livro;
+        $livro = livro::findOrFail($idlivro);
+        $comentario = $request->validate([
+            'comentario'=>['required', 'min:3', 'max:255'],
+        ]);
     }
 }

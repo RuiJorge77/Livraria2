@@ -53,4 +53,9 @@ Deleted_at:{{$livro->deleted_at}}
         Eleminar
         </a>
     @endif
+<form action="{{route('comentarios.store')}}" method="post">
+@csrf
+Comentário: <textarea name="titulo">{{old('comentario')}}</textarea><br>
+<input type="submit" value="enviar">
+</form>
 @endif

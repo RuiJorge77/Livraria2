@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 10-Dez-2020 às 16:25
+-- Generation Time: 14-Dez-2020 às 17:27
 -- Versão do servidor: 10.1.38-MariaDB
 -- versão do PHP: 7.3.2
 
@@ -77,8 +77,28 @@ CREATE TABLE `autores_livros` (
 --
 
 INSERT INTO `autores_livros` (`id_al`, `id_autor`, `id_livro`, `updated_at`, `created_at`) VALUES
-(1, 2, 16, '2020-12-10 15:14:37', '2020-12-10 15:14:37'),
-(2, 4, 16, '2020-12-10 15:14:37', '2020-12-10 15:14:37');
+(3, 2, 17, '2020-12-11 15:09:52', '2020-12-11 15:09:52'),
+(4, 3, 17, '2020-12-11 15:09:52', '2020-12-11 15:09:52'),
+(5, 2, 18, '2020-12-11 15:20:19', '2020-12-11 15:20:19'),
+(6, 3, 18, '2020-12-11 15:20:19', '2020-12-11 15:20:19'),
+(9, 1, 20, '2020-12-11 16:46:37', '2020-12-11 16:46:37'),
+(10, 3, 20, '2020-12-11 16:46:37', '2020-12-11 16:46:37');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `comentarios`
+--
+
+CREATE TABLE `comentarios` (
+  `id_livro` int(11) NOT NULL,
+  `id_user` int(11) DEFAULT NULL,
+  `comentario` varchar(255) NOT NULL,
+  `id_comentarios` int(11) NOT NULL,
+  `created_at` int(11) NOT NULL,
+  `updated_at` int(11) NOT NULL,
+  `deleted_at` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -140,6 +160,13 @@ CREATE TABLE `editoras_livros` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `editoras_livros`
+--
+
+INSERT INTO `editoras_livros` (`id_editora`, `id_livro`, `titulo`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(3, 10, NULL, '2020-12-11 15:28:08', '2020-12-11 15:28:08', NULL);
 
 -- --------------------------------------------------------
 
@@ -211,7 +238,7 @@ INSERT INTO `livros` (`id_livro`, `titulo`, `idioma`, `total_paginas`, `data_edi
 (13, 'Gestão da Informação em Museus: uma contribuição para o seu estudo', 'Português', NULL, NULL, '9789899901394', NULL, NULL, 2, 4, NULL, NULL, NULL, NULL, NULL),
 (14, 'Web 2.0 and Higher Education. A psychological perspective', 'Inglês', NULL, NULL, '9783659683466', NULL, NULL, 1, 1, NULL, NULL, NULL, NULL, NULL),
 (15, 'Contribuições para a discussão de um modelo de Governo Eletrónico Local para Angola', 'Português', NULL, NULL, '9789899933200', NULL, NULL, 1, 13, NULL, NULL, NULL, NULL, NULL),
-(16, 'ghsdrgsdhjkogtigt', 'Português', NULL, '2020-12-10 00:00:00', '7486930682846', NULL, NULL, 3, NULL, NULL, '2020-12-10 15:14:37', '2020-12-10 15:14:37', NULL, NULL);
+(20, 'История луиса мигеля', 'Russo', NULL, '2020-12-11 00:00:00', '3576785674571', NULL, NULL, 1, NULL, NULL, '2020-12-11 16:46:37', '2020-12-11 16:46:37', NULL, 3);
 
 -- --------------------------------------------------------
 
@@ -235,7 +262,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(2, 'Rui', '14111@aedah.pt', NULL, '$2y$10$ZPGU3CvEDJM2shTtJfQlzO.nwIHSiIbAbRKZ0hA.1X2.eAJP.JW0u', 'toPz1wKDTyt4doRCX2IDy2y7wNyFoBGAgDbQN44lOHRJIDUXhQS2ZptDke8F', '2020-12-10 13:58:17', '2020-12-10 13:58:17');
+(3, 'Rui', 'a14111@aedah.pt', NULL, '$2y$10$OJdzfoEL8i5M7vEmnSZxh.PgbA2o/WO4PkxTGVCu9Tzlc4XXqD59m', NULL, '2020-12-11 15:05:42', '2020-12-11 15:05:42');
 
 --
 -- Indexes for dumped tables
@@ -252,6 +279,13 @@ ALTER TABLE `autores`
 --
 ALTER TABLE `autores_livros`
   ADD PRIMARY KEY (`id_al`);
+
+--
+-- Indexes for table `comentarios`
+--
+ALTER TABLE `comentarios`
+  ADD PRIMARY KEY (`id_comentarios`),
+  ADD UNIQUE KEY `id_livro` (`id_livro`,`id_user`);
 
 --
 -- Indexes for table `edicoes`
@@ -297,7 +331,7 @@ ALTER TABLE `autores`
 -- AUTO_INCREMENT for table `autores_livros`
 --
 ALTER TABLE `autores_livros`
-  MODIFY `id_al` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_al` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `editoras`
@@ -315,13 +349,13 @@ ALTER TABLE `generos`
 -- AUTO_INCREMENT for table `livros`
 --
 ALTER TABLE `livros`
-  MODIFY `id_livro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id_livro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
