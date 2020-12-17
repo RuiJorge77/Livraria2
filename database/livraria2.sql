@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 14-Dez-2020 às 17:27
+-- Generation Time: 17-Dez-2020 às 15:23
 -- Versão do servidor: 10.1.38-MariaDB
 -- versão do PHP: 7.3.2
 
@@ -81,8 +81,7 @@ INSERT INTO `autores_livros` (`id_al`, `id_autor`, `id_livro`, `updated_at`, `cr
 (4, 3, 17, '2020-12-11 15:09:52', '2020-12-11 15:09:52'),
 (5, 2, 18, '2020-12-11 15:20:19', '2020-12-11 15:20:19'),
 (6, 3, 18, '2020-12-11 15:20:19', '2020-12-11 15:20:19'),
-(9, 1, 20, '2020-12-11 16:46:37', '2020-12-11 16:46:37'),
-(10, 3, 20, '2020-12-11 16:46:37', '2020-12-11 16:46:37');
+(12, 1, 20, '2020-12-17 14:17:36', '2020-12-17 14:17:36');
 
 -- --------------------------------------------------------
 
@@ -166,7 +165,8 @@ CREATE TABLE `editoras_livros` (
 --
 
 INSERT INTO `editoras_livros` (`id_editora`, `id_livro`, `titulo`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(3, 10, NULL, '2020-12-11 15:28:08', '2020-12-11 15:28:08', NULL);
+(3, 10, NULL, '2020-12-11 15:28:08', '2020-12-11 15:28:08', NULL),
+(3, 20, NULL, '2020-12-17 14:17:36', '2020-12-17 14:17:36', NULL);
 
 -- --------------------------------------------------------
 
@@ -238,7 +238,7 @@ INSERT INTO `livros` (`id_livro`, `titulo`, `idioma`, `total_paginas`, `data_edi
 (13, 'Gestão da Informação em Museus: uma contribuição para o seu estudo', 'Português', NULL, NULL, '9789899901394', NULL, NULL, 2, 4, NULL, NULL, NULL, NULL, NULL),
 (14, 'Web 2.0 and Higher Education. A psychological perspective', 'Inglês', NULL, NULL, '9783659683466', NULL, NULL, 1, 1, NULL, NULL, NULL, NULL, NULL),
 (15, 'Contribuições para a discussão de um modelo de Governo Eletrónico Local para Angola', 'Português', NULL, NULL, '9789899933200', NULL, NULL, 1, 13, NULL, NULL, NULL, NULL, NULL),
-(20, 'История луиса мигеля', 'Russo', NULL, '2020-12-11 00:00:00', '3576785674571', NULL, NULL, 1, NULL, NULL, '2020-12-11 16:46:37', '2020-12-11 16:46:37', NULL, 3);
+(20, 'История луиса мигеля', 'Russo', NULL, NULL, '3576785674571', NULL, NULL, 1, NULL, NULL, '2020-12-11 16:46:37', '2020-12-17 14:13:00', NULL, 3);
 
 -- --------------------------------------------------------
 
@@ -252,6 +252,7 @@ CREATE TABLE `users` (
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tipo_user` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'normal' COMMENT 'admin ou normal',
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -261,8 +262,8 @@ CREATE TABLE `users` (
 -- Extraindo dados da tabela `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(3, 'Rui', 'a14111@aedah.pt', NULL, '$2y$10$OJdzfoEL8i5M7vEmnSZxh.PgbA2o/WO4PkxTGVCu9Tzlc4XXqD59m', NULL, '2020-12-11 15:05:42', '2020-12-11 15:05:42');
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `tipo_user`, `remember_token`, `created_at`, `updated_at`) VALUES
+(3, 'Rui', 'a14111@aedah.pt', NULL, '$2y$10$OJdzfoEL8i5M7vEmnSZxh.PgbA2o/WO4PkxTGVCu9Tzlc4XXqD59m', 'normal', NULL, '2020-12-11 15:05:42', '2020-12-11 15:05:42');
 
 --
 -- Indexes for dumped tables
@@ -331,7 +332,7 @@ ALTER TABLE `autores`
 -- AUTO_INCREMENT for table `autores_livros`
 --
 ALTER TABLE `autores_livros`
-  MODIFY `id_al` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_al` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `editoras`

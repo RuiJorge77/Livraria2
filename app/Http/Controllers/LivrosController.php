@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\gate;
 use App\Models\Livro;
 use App\Models\Genero;
 use App\Models\Autor;
@@ -34,11 +35,7 @@ class LivrosController extends Controller
         $autores = Autor::all();
         $editoras = Editora::all();
         $generos = genero::all();
-        return view('livros.create', [
-            'generos'=>$generos,
-            'autores'=>$autores,
-            'editoras' =>$editoras
-        ]);
+        return view('livros.create', ['generos'=>$generos, 'autores'=>$autores, 'editoras' =>$editoras]);
         
     }
     
@@ -63,32 +60,36 @@ class LivrosController extends Controller
         }
         $autores = $request->id_autor;
         $editoras = $request->id_editora;
-        
         $livro = Livro::create($novoLivro);
         $livro->autores()->attach($autores);
         $livro->editoras()->attach($editoras);
-        return redirect()->route('livros.show', [
-           'id'=>$livro->id_livro 
-        ]);
+        if(Gate::allows('admin')){
+            return redirect()->route('livros.show', ['id'=>$livro->id_livro]);
+        }
+        else{
+            return redirect()->route('livros.index');
+        }
     }
     public function edit (Request $request){
-        $id = $request->id;        
-        $autores = Autor::all();
+        $id = $request->id;   
+        $livro = livro::where('id_livro', $id)->with('autores', 'editoras')->first();     
+        $autoresLivro = [];  
+        $autores = Autor::all();     
         $editoras = Editora::all();
         $generos = genero::all();
-        $livro = livro::where('id_livro', $id)->with('autores', 'editoras')->first();
+        //dd($autores);
         $autoresLivro = [];
         $editorasLivro = [];
         if(isset($livro->users->id_user)){
-            if(Auth::user()->id == $livro->users->id_user){
-                return view('livros.edi',['livro'=>$livro,'generos'=>$generos,'autores'=>$autores,'autores'=>$autoresLivro,'editorasLivro'=>$editoraLivro,'editoras'=>$editora]);
+            if(Gate::allows('atualizar-livro', $livro) || Gate::allows('admin')){
+                return view('livros.edit',['livro'=>$livro,'generos'=>$generos,'autores'=>$autores,'autoresLivro'=>$autoresLivro,'editorasLivro'=>$editoraLivro,'editoras'=>$editora]);
             }
             else{
-                return view('index');
+                return redirect()->route('livros.index');
             }
         }
         else{
-            return view('livros.edit',['livro'=>$livro,'generos'=>$generos,'autores'=>$autores,'autores'=>$autoresLivro,'editorasLivro'=>$editorasLivro,'editoras'=>$editoras]);
+            return view('livros.edit',['livro'=>$livro,'generos'=>$generos,'autores'=>$autores,'autoresLivro'=>$autoresLivro,'editorasLivro'=>$editorasLivro,'editoras'=>$editoras]);
         }
     }
     
@@ -111,9 +112,12 @@ class LivrosController extends Controller
         $livro->update($updateLivro);
         $livro->autores()->sync($autores);
         $livro->editoras()->sync($editoras);
-        return redirect()->route('livros.show', [
-           'id'=>$livro->id_livro 
-        ]);
+        if(Gate::allows('admin')){
+            return redirect()->route('livros.show', ['id'=>$livro->id_livro]);
+        }
+        else{
+            return redirect()->route('livros.index');
+        }
     }
     
     public function delete (Request $request){
@@ -150,7 +154,12 @@ class LivrosController extends Controller
         $livro->autores()->detach($autoresLivro);
         $livro->editoras()->detach($editorasLivro);
         $livro->delete();
-        return redirect()->route('livros.index')->with('mensagem', 'livro eliminado');
+        if(Gate::allows('admin')){
+            return redirect()->route('livros.index')->with('mensagem', 'livro eliminado');
+        }
+        else{
+            return redirect()->route('livros.index');
+        }
     }
     
     public function comentarios (request $request){

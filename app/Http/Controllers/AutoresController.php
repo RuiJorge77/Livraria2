@@ -38,10 +38,13 @@ class AutoresController extends Controller
             'fotografia'=>['nullable', 'min:1', 'max:100'],
         ]);
         $autor = Autor::create($novoAutor);
+        if(Gate::allows('admin')){
+            return redirect()->route('autores.show', ['ida'=>$autor->id_autor]);
+        }
+        else{
+            return redirect()->route('livros.index');
+        }
         
-        return redirect()->route('autores.show', [
-           'ida'=>$autor->id_autor 
-        ]);
     }
     
     public function edit (Request $request){
