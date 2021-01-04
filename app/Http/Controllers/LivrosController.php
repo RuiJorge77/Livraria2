@@ -71,26 +71,35 @@ class LivrosController extends Controller
         }
     }
     public function edit (Request $request){
-        $id = $request->id;   
-        $livro = livro::where('id_livro', $id)->with('autores', 'editoras')->first();     
-        $autoresLivro = [];  
-        $autores = Autor::all();     
-        $editoras = Editora::all();
-        $generos = genero::all();
-        //dd($autores);
-        $autoresLivro = [];
-        $editorasLivro = [];
-        if(isset($livro->users->id_user)){
-            if(Gate::allows('atualizar-livro', $livro) || Gate::allows('admin')){
-                return view('livros.edit',['livro'=>$livro,'generos'=>$generos,'autores'=>$autores,'autoresLivro'=>$autoresLivro,'editorasLivro'=>$editoraLivro,'editoras'=>$editora]);
-            }
-            else{
-                return redirect()->route('livros.index');
-            }
+        $id = $request->id;
+        $generos = Genero::all();
+        $autores = Autor::all();
+        $editoras=Editora::all();
+        $livro = livro::where('id_livro',$id)->with(['genero','autores','editoras'])->first();
+        $autoresLivros = [];
+        //obter id_autor dos autores deste livro
+        foreach($livro->autores as $autor){
+            $autoresLivros[] = $autor->id_autor;
+        }
+        $editorasLivro= [];
+        foreach($livro->editoras as $editora){
+            $editorasLivro[]=$editora->id_editora;
+        }
+        if(Gate::allows('atualizar-livro',$livro)||Gate::allows('admin')){
+        if(isset($livro->user->id_user))
+        if(auth()->user()->id == $livro->id_user){
+            return view('livros.edit', ['livro'=>$livro, 'generos' =>$genero, 'autores'=>$autores, 'autoresLivro'=>$autoresLivros, 'editoras'=>$editoras, 'editorasLivro'=>$editorasLivro]);
         }
         else{
-            return view('livros.edit',['livro'=>$livro,'generos'=>$generos,'autores'=>$autores,'autoresLivro'=>$autoresLivro,'editorasLivro'=>$editorasLivro,'editoras'=>$editoras]);
+            return view('index');
         }
+        else{ 
+            return view('livros.edit',['livro'=>$livro, 'generos'=>$generos, 'autores'=>$autores, 'autoresLivro'=>$autoresLivros, 'editoras'=>$editoras, 'editorasLivro'=>$editorasLivro]);
+            }
+            }
+            else{
+                return redirect()->route(livros.index)->with('mensagem','Nao tem premissao para aceder a area protegida');
+            }
     }
     
     public function update (Request $request){
@@ -169,4 +178,5 @@ class LivrosController extends Controller
             'comentario'=>['required', 'min:3', 'max:255'],
         ]);
     }
+    
 }

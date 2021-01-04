@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\gate;
 use App\Models\Editora;
 
 class EditorasController extends Controller
@@ -26,63 +27,75 @@ class EditorasController extends Controller
     }
     
     public function create(){
-        return view('editoras.create');
+         if(Gate::allows('admin')){
+            return view('editoras.create');
+         }
     }
     
     public function store(Request $request){
-        //$novoeditora = $request->all();
-        //dd ($novoeditora);
-        $novoEditora = $request->validate([
-            'nome'=>['required', 'min:3', 'max:100'],
-            'morada'=>['required', 'min:3', 'max:100'],
-            'observacoes'=>['nullable', 'min:1', 'max:100'],
-        ]);
-        $editora = Editora::create($novoEditora);
-        
-        return redirect()->route('editoras.show', [
-           'ide'=>$editora->id_editora 
-        ]);
+         if(Gate::allows('admin')){
+            //$novoeditora = $request->all();
+            //dd ($novoeditora);
+            $novoEditora = $request->validate([
+                'nome'=>['required', 'min:3', 'max:100'],
+                'morada'=>['required', 'min:3', 'max:100'],
+                'observacoes'=>['nullable', 'min:1', 'max:100'],
+            ]);
+            $editora = Editora::create($novoEditora);
+
+            return redirect()->route('editoras.show', [
+               'ide'=>$editora->id_editora 
+            ]);
+         }
     }
     
     public function edit (Request $request){
-        $id = $request->id;
-        $editora = editora::where('id_editora', $id)->first();
-        return view('editoras.edit', [
-           'editora'=>$editora 
-        ]);
+         if(Gate::allows('admin')){
+            $id = $request->id;
+            $editora = editora::where('id_editora', $id)->first();
+            return view('editoras.edit', [
+               'editora'=>$editora 
+            ]);
+         }
     }
     
     public function update (Request $request){
-        $id = $request->$id;
-        $editora = editora::findOrFail(id);
-        $updateEditora = $request->validate([
-            'nome'=>['required', 'min:3', 'max:100'],
-            'morada'=>['required', 'min:3', 'max:100'],
-            'observacoes'=>['nullable', 'min:1', 'max:100'],
+         if(Gate::allows('admin')){
+            $id = $request->$id;
+            $editora = editora::findOrFail(id);
+            $updateEditora = $request->validate([
+                'nome'=>['required', 'min:3', 'max:100'],
+                'morada'=>['required', 'min:3', 'max:100'],
+                'observacoes'=>['nullable', 'min:1', 'max:100'],
+                ]);
+            $editora->update($updateEditora);
+
+            return redirect()->route('editoras.show', [
+               'id'=>$editora->id_editora 
             ]);
-        $editora->update($updateEditora);
-        
-        return redirect()->route('editoras.show', [
-           'id'=>$editora->id_editora 
-        ]);
+         }
     }
     
     public function delete (Request $request){
-        $editora = editora::where('id_editora', $request->id)->first();
-        if(is_null($editora)) 
-        {
-            return redirect()->route('editoras.index')->with('mensagem', 'A Editora nao existe');
-        }
-        else
-        {
-            return view('editoras.delete', ['editora'=>$editora]);
-        }
+         if(Gate::allows('admin')){
+            $editora = editora::where('id_editora', $request->id)->first();
+            if(is_null($editora)) 
+            {
+                return redirect()->route('editoras.index')->with('mensagem', 'A Editora nao existe');
+            }
+            else
+            {
+                return view('editoras.delete', ['editora'=>$editora]);
+            }
+         }
     }
     
     public function destroy (Request $request){
-        $ideditora = $request->id;
-        $editora = editora::findOrFail($ideditora);
-        $editora->delete();
-        return redirect()->route('editoras.index')->with('mensagem', 'Editora eliminado');
+         if(Gate::allows('admin')){
+            $ideditora = $request->id;
+            $editora = editora::findOrFail($ideditora);
+            $editora->delete();
+            return redirect()->route('editoras.index')->with('mensagem', 'Editora eliminado');
+         }
     }
 }
