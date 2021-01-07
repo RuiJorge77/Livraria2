@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 17-Dez-2020 às 15:23
+-- Generation Time: 07-Jan-2021 às 11:20
 -- Versão do servidor: 10.1.38-MariaDB
 -- versão do PHP: 7.3.2
 
@@ -81,7 +81,7 @@ INSERT INTO `autores_livros` (`id_al`, `id_autor`, `id_livro`, `updated_at`, `cr
 (4, 3, 17, '2020-12-11 15:09:52', '2020-12-11 15:09:52'),
 (5, 2, 18, '2020-12-11 15:20:19', '2020-12-11 15:20:19'),
 (6, 3, 18, '2020-12-11 15:20:19', '2020-12-11 15:20:19'),
-(12, 1, 20, '2020-12-17 14:17:36', '2020-12-17 14:17:36');
+(13, 2, 21, '2021-01-07 10:04:36', '2021-01-07 10:04:36');
 
 -- --------------------------------------------------------
 
@@ -165,8 +165,7 @@ CREATE TABLE `editoras_livros` (
 --
 
 INSERT INTO `editoras_livros` (`id_editora`, `id_livro`, `titulo`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(3, 10, NULL, '2020-12-11 15:28:08', '2020-12-11 15:28:08', NULL),
-(3, 20, NULL, '2020-12-17 14:17:36', '2020-12-17 14:17:36', NULL);
+(3, 10, NULL, '2020-12-11 15:28:08', '2020-12-11 15:28:08', NULL);
 
 -- --------------------------------------------------------
 
@@ -238,7 +237,7 @@ INSERT INTO `livros` (`id_livro`, `titulo`, `idioma`, `total_paginas`, `data_edi
 (13, 'Gestão da Informação em Museus: uma contribuição para o seu estudo', 'Português', NULL, NULL, '9789899901394', NULL, NULL, 2, 4, NULL, NULL, NULL, NULL, NULL),
 (14, 'Web 2.0 and Higher Education. A psychological perspective', 'Inglês', NULL, NULL, '9783659683466', NULL, NULL, 1, 1, NULL, NULL, NULL, NULL, NULL),
 (15, 'Contribuições para a discussão de um modelo de Governo Eletrónico Local para Angola', 'Português', NULL, NULL, '9789899933200', NULL, NULL, 1, 13, NULL, NULL, NULL, NULL, NULL),
-(20, 'История луиса мигеля', 'Russo', NULL, NULL, '3576785674571', NULL, NULL, 1, NULL, NULL, '2020-12-11 16:46:37', '2020-12-17 14:13:00', NULL, 3);
+(21, 'История луиса мигеля', 'Russo', NULL, '2021-01-07 00:00:00', '6454777475607', NULL, '1610013876_Penguins.jpg', 5, NULL, NULL, '2021-01-07 10:04:36', '2021-01-07 10:04:36', NULL, 3);
 
 -- --------------------------------------------------------
 
@@ -263,7 +262,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `tipo_user`, `remember_token`, `created_at`, `updated_at`) VALUES
-(3, 'Rui', 'a14111@aedah.pt', NULL, '$2y$10$OJdzfoEL8i5M7vEmnSZxh.PgbA2o/WO4PkxTGVCu9Tzlc4XXqD59m', 'normal', NULL, '2020-12-11 15:05:42', '2020-12-11 15:05:42');
+(3, 'Rui', 'a14111@aedah.pt', NULL, '$2y$10$OJdzfoEL8i5M7vEmnSZxh.PgbA2o/WO4PkxTGVCu9Tzlc4XXqD59m', 'admin', NULL, '2020-12-11 15:05:42', '2020-12-11 15:05:42');
 
 --
 -- Indexes for dumped tables
@@ -332,7 +331,7 @@ ALTER TABLE `autores`
 -- AUTO_INCREMENT for table `autores_livros`
 --
 ALTER TABLE `autores_livros`
-  MODIFY `id_al` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_al` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `editoras`
@@ -350,7 +349,7 @@ ALTER TABLE `generos`
 -- AUTO_INCREMENT for table `livros`
 --
 ALTER TABLE `livros`
-  MODIFY `id_livro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id_livro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `users`

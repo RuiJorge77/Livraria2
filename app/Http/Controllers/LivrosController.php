@@ -41,7 +41,7 @@ class LivrosController extends Controller
     
     public function store(Request $request){
         //$novolivro = $request->all();
-        //dd ($novolivro);
+        //dd($novolivro);
         
         $novoLivro = $request->validate([
             'titulo'=>['required', 'min:3', 'max:100'],
@@ -50,10 +50,20 @@ class LivrosController extends Controller
             'data_edicao'=>['nullable', 'date'],
             'isbn'=>['required', 'min:13', 'max:13'],
             'observacoes'=>['nullable', 'min:3', 'max:255'],
-            'imagem_capa'=>['nullable'],
+            'imagem_capa'=>['image','nullable','max:2000'],
             'id_genero'=>['numeric', 'min:1', 'max:100'],
             'sinopse'=>['nullable', 'min:3', 'max:255'],
         ]);
+        
+        if($request->hasFile('imagem_capa')){
+            $nomeimagem = $request->file('imagem_capa')->getClientOriginalName();
+            
+            $nomeimagem = time().'_'. $nomeimagem;
+            $guardarimagem = $request->file('imagem_capa')->storeAs('imagens/livros', $nomeimagem);
+            
+            $novoLivro['imagem_capa'] = $nomeimagem;
+        }
+        
         if(Auth::check()){
             $userAtual = Auth::user()->id;
             $novoLivro['id_user']=$userAtual; 
@@ -112,7 +122,7 @@ class LivrosController extends Controller
             'data_edicao'=>['nullable', 'date'],
             'isbn'=>['required', 'min:13', 'max:13'],
             'observacoes'=>['nullable', 'min:3', 'max:255'],
-            'imagem_capa'=>['nullable'],
+            'imagem_capa'=>['image','nullable','max:2000'],
             'id_genero'=>['numeric', 'min:1', 'max:100'],
             'sinopse'=>['nullable', 'min:3', 'max:255'],
             ]);
