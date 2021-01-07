@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 07-Jan-2021 às 11:20
+-- Generation Time: 07-Jan-2021 às 15:51
 -- Versão do servidor: 10.1.38-MariaDB
 -- versão do PHP: 7.3.2
 
@@ -165,7 +165,8 @@ CREATE TABLE `editoras_livros` (
 --
 
 INSERT INTO `editoras_livros` (`id_editora`, `id_livro`, `titulo`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(3, 10, NULL, '2020-12-11 15:28:08', '2020-12-11 15:28:08', NULL);
+(3, 10, NULL, '2020-12-11 15:28:08', '2020-12-11 15:28:08', NULL),
+(3, 21, NULL, '2021-01-07 13:56:02', '2021-01-07 13:56:02', NULL);
 
 -- --------------------------------------------------------
 
@@ -211,6 +212,7 @@ CREATE TABLE `livros` (
   `id_genero` int(11) DEFAULT NULL,
   `id_autor` int(11) DEFAULT NULL,
   `sinopse` varchar(255) DEFAULT NULL,
+  `pdf` varchar(50) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
@@ -221,23 +223,23 @@ CREATE TABLE `livros` (
 -- Extraindo dados da tabela `livros`
 --
 
-INSERT INTO `livros` (`id_livro`, `titulo`, `idioma`, `total_paginas`, `data_edicao`, `isbn`, `observacoes`, `imagem_capa`, `id_genero`, `id_autor`, `sinopse`, `created_at`, `updated_at`, `deleted_at`, `id_user`) VALUES
-(1, 'sistema de informação de apoio a gestão', 'Portugês', NULL, NULL, '9728589433', NULL, NULL, 1, 1, NULL, NULL, NULL, NULL, NULL),
-(2, 'cidades e regiões digitais:impacte na cidade e nas pessoas', 'Portugês', NULL, NULL, '9728830033', NULL, NULL, 2, 1, NULL, NULL, NULL, NULL, NULL),
-(3, 'Informatica e Competencias Tecnologicas para a Sociedade da Informação', 'Portugês', NULL, NULL, '9789728830304', NULL, NULL, 1, 3, NULL, NULL, NULL, NULL, NULL),
-(4, 'Readings in Information Society', 'Inglês', NULL, NULL, '9789727228997', NULL, NULL, 3, 5, NULL, NULL, NULL, NULL, NULL),
-(5, 'Sociedade da Informação: balanço e implicações ', 'Português', NULL, NULL, '9789728830182', NULL, NULL, 3, 7, NULL, NULL, NULL, NULL, NULL),
-(6, 'O Tribunal de Contas e as Autarquias Locais', 'Portugês', NULL, NULL, '9789899936614', NULL, NULL, 2, 7, NULL, NULL, NULL, NULL, NULL),
-(7, 'Informática e Competências Tecnológicas para a Sociedade da Informação 2ed', 'Português', NULL, NULL, '9789728830304', NULL, NULL, 2, 8, NULL, NULL, NULL, NULL, NULL),
-(8, 'Negócio Eletrónico - conceitos e perspetivas de desenvolvimento', 'Português', NULL, NULL, '9789899552258', NULL, NULL, 1, 8, NULL, NULL, NULL, NULL, NULL),
-(9, 'Gestão da Informação na Biblioteca Escolar', 'Português', NULL, NULL, '9789722314916', NULL, NULL, 1, 9, NULL, NULL, NULL, NULL, NULL),
-(10, 'A virtual environment to share knowledge', 'Inglês', NULL, NULL, '9781351729901', NULL, NULL, 2, 4, NULL, NULL, NULL, NULL, NULL),
-(11, 'Ciência da Informação: contributos para o seu estudo', 'Português', NULL, NULL, '9789896430900', NULL, NULL, 1, 4, NULL, NULL, NULL, NULL, NULL),
-(12, 'Repensar a Sociedade da Informação e do Conhecimento no Início do Século XXI', 'Português', NULL, NULL, '9789726186953', NULL, NULL, 3, 4, NULL, NULL, NULL, NULL, NULL),
-(13, 'Gestão da Informação em Museus: uma contribuição para o seu estudo', 'Português', NULL, NULL, '9789899901394', NULL, NULL, 2, 4, NULL, NULL, NULL, NULL, NULL),
-(14, 'Web 2.0 and Higher Education. A psychological perspective', 'Inglês', NULL, NULL, '9783659683466', NULL, NULL, 1, 1, NULL, NULL, NULL, NULL, NULL),
-(15, 'Contribuições para a discussão de um modelo de Governo Eletrónico Local para Angola', 'Português', NULL, NULL, '9789899933200', NULL, NULL, 1, 13, NULL, NULL, NULL, NULL, NULL),
-(21, 'История луиса мигеля', 'Russo', NULL, '2021-01-07 00:00:00', '6454777475607', NULL, '1610013876_Penguins.jpg', 5, NULL, NULL, '2021-01-07 10:04:36', '2021-01-07 10:04:36', NULL, 3);
+INSERT INTO `livros` (`id_livro`, `titulo`, `idioma`, `total_paginas`, `data_edicao`, `isbn`, `observacoes`, `imagem_capa`, `id_genero`, `id_autor`, `sinopse`, `pdf`, `created_at`, `updated_at`, `deleted_at`, `id_user`) VALUES
+(1, 'sistema de informação de apoio a gestão', 'Portugês', NULL, NULL, '9728589433', NULL, NULL, 1, 1, NULL, '', NULL, NULL, NULL, NULL),
+(2, 'cidades e regiões digitais:impacte na cidade e nas pessoas', 'Portugês', NULL, NULL, '9728830033', NULL, NULL, 2, 1, NULL, '', NULL, NULL, NULL, NULL),
+(3, 'Informatica e Competencias Tecnologicas para a Sociedade da Informação', 'Portugês', NULL, NULL, '9789728830304', NULL, NULL, 1, 3, NULL, '', NULL, NULL, NULL, NULL),
+(4, 'Readings in Information Society', 'Inglês', NULL, NULL, '9789727228997', NULL, NULL, 3, 5, NULL, '', NULL, NULL, NULL, NULL),
+(5, 'Sociedade da Informação: balanço e implicações ', 'Português', NULL, NULL, '9789728830182', NULL, NULL, 3, 7, NULL, '', NULL, NULL, NULL, NULL),
+(6, 'O Tribunal de Contas e as Autarquias Locais', 'Portugês', NULL, NULL, '9789899936614', NULL, NULL, 2, 7, NULL, '', NULL, NULL, NULL, NULL),
+(7, 'Informática e Competências Tecnológicas para a Sociedade da Informação 2ed', 'Português', NULL, NULL, '9789728830304', NULL, NULL, 2, 8, NULL, '', NULL, NULL, NULL, NULL),
+(8, 'Negócio Eletrónico - conceitos e perspetivas de desenvolvimento', 'Português', NULL, NULL, '9789899552258', NULL, NULL, 1, 8, NULL, '', NULL, NULL, NULL, NULL),
+(9, 'Gestão da Informação na Biblioteca Escolar', 'Português', NULL, NULL, '9789722314916', NULL, NULL, 1, 9, NULL, '', NULL, NULL, NULL, NULL),
+(10, 'A virtual environment to share knowledge', 'Inglês', NULL, NULL, '9781351729901', NULL, NULL, 2, 4, NULL, '', NULL, NULL, NULL, NULL),
+(11, 'Ciência da Informação: contributos para o seu estudo', 'Português', NULL, NULL, '9789896430900', NULL, NULL, 1, 4, NULL, '', NULL, NULL, NULL, NULL),
+(12, 'Repensar a Sociedade da Informação e do Conhecimento no Início do Século XXI', 'Português', NULL, NULL, '9789726186953', NULL, NULL, 3, 4, NULL, '', NULL, NULL, NULL, NULL),
+(13, 'Gestão da Informação em Museus: uma contribuição para o seu estudo', 'Português', NULL, NULL, '9789899901394', NULL, NULL, 2, 4, NULL, '', NULL, NULL, NULL, NULL),
+(14, 'Web 2.0 and Higher Education. A psychological perspective', 'Inglês', NULL, NULL, '9783659683466', NULL, NULL, 1, 1, NULL, '', NULL, NULL, NULL, NULL),
+(15, 'Contribuições para a discussão de um modelo de Governo Eletrónico Local para Angola', 'Português', NULL, NULL, '9789899933200', NULL, NULL, 1, 13, NULL, '', NULL, NULL, NULL, NULL),
+(21, 'История луиса мигеля', 'Russo', NULL, NULL, '6454777475607', NULL, '1610029860_Koala.jpg', 5, NULL, NULL, '', '2021-01-07 10:04:36', '2021-01-07 14:31:00', NULL, 3);
 
 -- --------------------------------------------------------
 

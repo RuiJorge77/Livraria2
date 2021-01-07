@@ -67,6 +67,12 @@
         deverá indicar uma sinopse correta
         <br>
     @endif
+    PDF: <input type="file" name="pdf" value="{{old('pdf')}}"><br>
+    @if($errors->has('pdf') )
+        deverá indicar um pdf correta
+        <br>
+    @endif
+    <br>
     Editora(es):
     <select name="id_editora[]" multiple="multiple">
         @foreach ($editoras as $editora)

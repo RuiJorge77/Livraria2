@@ -26,6 +26,10 @@
         button,input{
             background-color: #6be585;
         }
+        img{
+            height: 200px;
+            
+        }
     </style>  
     </head>
 <body>

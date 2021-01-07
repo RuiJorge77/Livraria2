@@ -8,6 +8,10 @@ Data Edição:{{$livro->data_edicao}}<br>
 Total paginas:{{$livro->total_paginas}}<br>
 Observações:{{$livro->observacoes}}<br>
 Imagem Capa:{{$livro->imagem_capa}}<br>
+@if(isset($livro->imagem_capa))
+    <img src="{{asset('imagens/livros/'.$livro->imagem_capa)}}">
+@endif
+<br>
 @if(! is_null($livro->id_user)) 
     Adicionado Por: {{$livro->user->name}}<br>
 @endif
@@ -40,6 +44,7 @@ Imagem Capa:{{$livro->imagem_capa}}<br>
     @endif
 
 Sinopse:{{$livro->sinopse}}<br>
+PDF:{{$livro->pdf}}<br>
 Created_at:{{$livro->created_at}}<br>
 Updated_at:{{$livro->updated_at}}<br>
 Deleted_at:{{$livro->deleted_at}}

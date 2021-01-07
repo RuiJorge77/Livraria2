@@ -62,5 +62,11 @@
         deverá indicar uma sinopse correta
         <br>
     @endif
+    <br>
+    PDF: <input type="file" name="pdf" value="{{old('pdf')}}"><br>
+    @if($errors->has('pdf') )
+        deverá indicar um pdf correta
+        <br>
+    @endif
     <input type="submit" value="enviar">   
 </form>
